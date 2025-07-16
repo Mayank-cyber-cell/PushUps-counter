@@ -164,7 +164,7 @@ while True:
 - Detect poor form (e.g., bent knees)
 - Export stats (CSV, Graphs)
 
----
+----
 
 ## 👨‍💻 Credits
 Developed by Abdelkareem Hossam, using MediaPipe Pose and OpenCV.
