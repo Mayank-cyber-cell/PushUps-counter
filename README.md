@@ -166,10 +166,5 @@ while True:
 
 ----
 
-## 👨‍💻 Credits
-Developed by Abdelkareem Hossam, using MediaPipe Pose and OpenCV.
 
-🎥 I will be publishing a full video explaining every single line of this code. If you use this project, don't forget to mention me and fork the repo.
-
-Feel free to improve or extend it for other exercises like squats, jumping jacks, or yoga!
 
