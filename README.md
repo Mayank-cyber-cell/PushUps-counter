@@ -6,7 +6,7 @@ This project uses **MediaPipe** and **OpenCV** to build an intelligent push-up c
 
 ## 📦 File Included
 
-### push_up_counter.py
+### "push_up_counter.py"
 This single file handles everything:
 - Captures webcam feed
 - Detects human pose
