@@ -11,253 +11,273 @@
                 extend: {
                     colors: {
                         'gym-dark': '#1a1a1a',
-                        'gym-accent': '#ff6b35',
-                        'gym-secondary': '#2d2d2d',
-                        'gym-success': '#4ade80',
+                        'gym-darker': '#0f0f0f',
+                        'gym-orange': '#ff6b35',
+                        'gym-orange-dark': '#e55a2b',
                     }
                 }
             }
         }
     </script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gym-dark text-white min-h-screen">
     <!-- Header -->
-    <header class="bg-gym-secondary shadow-lg">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-dumbbell text-gym-accent text-2xl"></i>
-                    <h1 class="text-2xl font-bold">AI Push-Up Counter</h1>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="text-sm text-gray-300">
-                        <i class="fas fa-clock mr-1"></i>
-                        Session: <span id="sessionTime" class="font-mono">00:00</span>
-                    </div>
-                </div>
-            </div>
+    <header class="bg-gym-darker shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl font-bold text-center text-gym-orange">💪 Push-Up Counter</h1>
+            <p class="text-center text-gray-400 mt-2">AI-Powered Fitness Tracker</p>
         </div>
     </header>
 
-    <!-- Demo Notice -->
-    <div class="bg-yellow-600 text-black py-3">
-        <div class="container mx-auto px-6 text-center">
-            <i class="fas fa-info-circle mr-2"></i>
-            <strong>Demo Mode:</strong> This is a frontend demonstration. Camera functionality requires OpenCV and MediaPipe to be installed locally.
-        </div>
-    </div>
-
     <!-- Main Content -->
-    <main class="container mx-auto px-6 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <main class="container mx-auto px-4 py-8">
+        <!-- Demo Notice -->
+        <div class="bg-yellow-900 border border-yellow-600 text-yellow-200 px-4 py-3 rounded mb-6">
+            <div class="flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                <strong>Demo Mode:</strong> This is a frontend demonstration. Camera functionality requires OpenCV and MediaPipe which aren't available in this environment.
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
             <!-- Video Feed Section -->
             <div class="lg:col-span-2">
-                <div class="bg-gym-secondary rounded-xl p-6 shadow-xl">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-xl font-semibold flex items-center">
-                            <i class="fas fa-video mr-2 text-gym-accent"></i>
-                            Live Feed
-                        </h2>
-                        <div class="flex space-x-2">
-                            <button id="startBtn" class="bg-gym-success hover:bg-green-600 px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center space-x-2">
-                                <i class="fas fa-play"></i>
-                                <span>Start</span>
-                            </button>
-                            <button id="stopBtn" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center space-x-2" disabled>
-                                <i class="fas fa-stop"></i>
-                                <span>Stop</span>
-                            </button>
+                <div class="bg-gym-darker rounded-lg p-6 shadow-xl">
+                    <h2 class="text-xl font-semibold mb-4 text-gym-orange">📹 Camera Feed</h2>
+                    <div class="relative bg-black rounded-lg overflow-hidden aspect-video flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-gray-700 rounded-full flex items-center justify-center">
+                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <p class="text-gray-400">Camera feed would appear here</p>
+                            <p class="text-sm text-gray-500 mt-2">In full version: Live pose detection with MediaPipe</p>
                         </div>
                     </div>
-                    
-                    <div class="relative bg-black rounded-lg overflow-hidden" style="aspect-ratio: 4/3;">
-                        <div id="videoPlaceholder" class="w-full h-full flex items-center justify-center text-gray-400">
-                            <div class="text-center">
-                                <i class="fas fa-camera text-6xl mb-4 opacity-50"></i>
-                                <p class="text-lg">Camera feed would appear here</p>
-                                <p class="text-sm mt-2 opacity-75">Install OpenCV and MediaPipe for full functionality</p>
-                            </div>
-                        </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="bg-gym-darker rounded-lg p-6 shadow-xl mt-6">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button id="startBtn" class="bg-gym-orange hover:bg-gym-orange-dark text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.5a1.5 1.5 0 011.5 1.5V12a1.5 1.5 0 01-1.5 1.5H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Start Session
+                        </button>
+                        <button id="stopBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center" disabled>
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path>
+                            </svg>
+                            Stop Session
+                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- Stats Panel -->
             <div class="space-y-6">
-                <!-- Push-Up Count -->
-                <div class="bg-gym-secondary rounded-xl p-6 shadow-xl">
-                    <div class="text-center">
-                        <div class="flex items-center justify-center mb-2">
-                            <i class="fas fa-trophy text-gym-accent text-2xl mr-2"></i>
-                            <h3 class="text-lg font-semibold">Push-Ups</h3>
-                        </div>
-                        <div class="text-5xl font-bold text-gym-accent mb-2" id="pushUpCount">0</div>
-                        <div class="text-sm text-gray-400">Total Reps</div>
+                <!-- Current Stats -->
+                <div class="bg-gym-darker rounded-lg p-6 shadow-xl">
+                    <h2 class="text-xl font-semibold mb-4 text-gym-orange">📊 Current Session</h2>
+                    
+                    <!-- Push-up Count -->
+                    <div class="text-center mb-6">
+                        <div class="text-5xl font-bold text-gym-orange mb-2" id="pushupCount">0</div>
+                        <div class="text-gray-400">Push-ups</div>
                     </div>
-                </div>
 
-                <!-- Progress -->
-                <div class="bg-gym-secondary rounded-xl p-6 shadow-xl">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-lg font-semibold flex items-center">
-                            <i class="fas fa-chart-line text-gym-accent mr-2"></i>
-                            Progress
-                        </h3>
-                        <span id="progressPercentage" class="text-gym-accent font-bold">0%</span>
+                    <!-- Progress Bar -->
+                    <div class="mb-4">
+                        <div class="flex justify-between text-sm text-gray-400 mb-2">
+                            <span>Rep Progress</span>
+                            <span id="progressPercent">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-3">
+                            <div class="bg-gym-orange h-3 rounded-full transition-all duration-300" style="width: 0%" id="progressBar"></div>
+                        </div>
                     </div>
-                    <div class="w-full bg-gray-700 rounded-full h-3 mb-2">
-                        <div id="progressBar" class="bg-gradient-to-r from-gym-accent to-gym-success h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
-                    </div>
-                    <div class="text-xs text-gray-400 text-center">Current Rep Progress</div>
-                </div>
 
-                <!-- Session Stats -->
-                <div class="bg-gym-secondary rounded-xl p-6 shadow-xl">
-                    <h3 class="text-lg font-semibold mb-4 flex items-center">
-                        <i class="fas fa-stopwatch text-gym-accent mr-2"></i>
-                        Session Stats
-                    </h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Duration</span>
-                            <span id="sessionDuration" class="font-mono font-semibold">00:00</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Status</span>
-                            <span id="sessionStatus" class="px-2 py-1 rounded-full text-xs font-medium bg-gray-700 text-gray-300">Demo Mode</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Avg/Min</span>
-                            <span id="avgPerMin" class="font-semibold">0</span>
-                        </div>
+                    <!-- Session Time -->
+                    <div class="flex justify-between items-center py-2 border-t border-gray-700">
+                        <span class="text-gray-400">Session Time</span>
+                        <span class="font-semibold" id="sessionTime">00:00</span>
+                    </div>
+
+                    <!-- Average Rate -->
+                    <div class="flex justify-between items-center py-2">
+                        <span class="text-gray-400">Avg/Min</span>
+                        <span class="font-semibold" id="avgRate">0.0</span>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="flex justify-between items-center py-2">
+                        <span class="text-gray-400">Status</span>
+                        <span class="font-semibold text-red-400" id="status">Stopped</span>
                     </div>
                 </div>
 
                 <!-- Instructions -->
-                <div class="bg-gym-secondary rounded-xl p-6 shadow-xl">
-                    <h3 class="text-lg font-semibold mb-3 flex items-center">
-                        <i class="fas fa-info-circle text-gym-accent mr-2"></i>
-                        Setup Instructions
-                    </h3>
-                    <div class="text-sm text-gray-300 space-y-2">
-                        <p class="font-semibold text-gym-accent">To enable full functionality:</p>
-                        <ol class="list-decimal list-inside space-y-1 ml-2">
-                            <li>Install Python packages locally:</li>
-                            <li class="ml-4 font-mono text-xs bg-gray-800 p-2 rounded">pip install flask opencv-python mediapipe numpy</li>
-                            <li>Run the full app.py instead of this demo</li>
-                            <li>Connect your webcam</li>
-                        </ol>
-                    </div>
+                <div class="bg-gym-darker rounded-lg p-6 shadow-xl">
+                    <h2 class="text-xl font-semibold mb-4 text-gym-orange">📋 Instructions</h2>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-gym-orange mr-2">1.</span>
+                            Position yourself in front of the camera
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-gym-orange mr-2">2.</span>
+                            Get into push-up starting position
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-gym-orange mr-2">3.</span>
+                            Click "Start Session" to begin
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-gym-orange mr-2">4.</span>
+                            Perform push-ups with proper form
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-gym-orange mr-2">5.</span>
+                            AI will automatically count your reps
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Tips -->
+                <div class="bg-gym-darker rounded-lg p-6 shadow-xl">
+                    <h2 class="text-xl font-semibold mb-4 text-gym-orange">💡 Tips</h2>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>• Ensure good lighting</li>
+                        <li>• Keep your full body in frame</li>
+                        <li>• Maintain proper push-up form</li>
+                        <li>• Go all the way down and up</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gym-secondary mt-12 py-6">
-        <div class="container mx-auto px-6 text-center text-gray-400">
-            <p>&copy; 2025 AI Push-Up Counter. Powered by MediaPipe & OpenCV.</p>
-        </div>
-    </footer>
-
     <script>
         let isRunning = false;
         let startTime = null;
-        let sessionInterval = null;
+        let sessionTimer = null;
+        let pushupCount = 0;
+        let currentProgress = 0;
 
         const startBtn = document.getElementById('startBtn');
         const stopBtn = document.getElementById('stopBtn');
-        const pushUpCount = document.getElementById('pushUpCount');
-        const progressPercentage = document.getElementById('progressPercentage');
+        const pushupCountEl = document.getElementById('pushupCount');
         const progressBar = document.getElementById('progressBar');
-        const sessionTime = document.getElementById('sessionTime');
-        const sessionDuration = document.getElementById('sessionDuration');
-        const sessionStatus = document.getElementById('sessionStatus');
-        const avgPerMin = document.getElementById('avgPerMin');
+        const progressPercent = document.getElementById('progressPercent');
+        const sessionTimeEl = document.getElementById('sessionTime');
+        const avgRateEl = document.getElementById('avgRate');
+        const statusEl = document.getElementById('status');
 
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
+        // Demo simulation
+        let demoInterval = null;
+        let progressDirection = 1;
 
-        function updateSessionTimer() {
-            if (startTime) {
-                const elapsed = Math.floor((Date.now() - startTime) / 1000);
-                sessionTime.textContent = formatTime(elapsed);
-                sessionDuration.textContent = formatTime(elapsed);
-            }
-        }
-
-        function updateStats() {
-            if (!isRunning) return;
+        function startSession() {
+            isRunning = true;
+            startTime = Date.now();
+            pushupCount = 0;
+            currentProgress = 0;
             
-            fetch('/stats')
-                .then(response => response.json())
-                .then(data => {
-                    pushUpCount.textContent = data.count;
-                    progressPercentage.textContent = `${data.percentage}%`;
-                    progressBar.style.width = `${data.percentage}%`;
-                    
-                    if (data.session_time > 0) {
-                        const avgRate = Math.round((data.count / data.session_time) * 60);
-                        avgPerMin.textContent = avgRate;
-                    }
-                })
-                .catch(error => console.error('Error fetching stats:', error));
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+            statusEl.textContent = 'Active';
+            statusEl.className = 'font-semibold text-green-400';
+            
+            // Start session timer
+            sessionTimer = setInterval(updateSessionTime, 1000);
+            
+            // Start demo simulation
+            demoInterval = setInterval(simulateProgress, 100);
+            
+            updateDisplay();
         }
 
-        startBtn.addEventListener('click', async () => {
-            try {
-                const response = await fetch('/start');
-                const data = await response.json();
-                
-                if (data.success) {
-                    isRunning = true;
-                    startTime = Date.now();
-                    
-                    startBtn.disabled = true;
-                    stopBtn.disabled = false;
-                    
-                    sessionStatus.textContent = 'Demo Active';
-                    sessionStatus.className = 'px-2 py-1 rounded-full text-xs font-medium bg-yellow-600 text-black';
-                    
-                    sessionInterval = setInterval(updateSessionTimer, 1000);
-                    setInterval(updateStats, 500);
-                    
-                    alert('Demo mode: ' + data.message);
-                }
-            } catch (error) {
-                console.error('Error starting counter:', error);
+        function stopSession() {
+            isRunning = false;
+            
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            statusEl.textContent = 'Stopped';
+            statusEl.className = 'font-semibold text-red-400';
+            
+            if (sessionTimer) {
+                clearInterval(sessionTimer);
+                sessionTimer = null;
             }
-        });
+            
+            if (demoInterval) {
+                clearInterval(demoInterval);
+                demoInterval = null;
+            }
+        }
 
-        stopBtn.addEventListener('click', async () => {
-            try {
-                const response = await fetch('/stop');
-                const data = await response.json();
-                
-                if (data.success) {
-                    isRunning = false;
-                    
-                    startBtn.disabled = false;
-                    stopBtn.disabled = true;
-                    
-                    sessionStatus.textContent = 'Demo Mode';
-                    sessionStatus.className = 'px-2 py-1 rounded-full text-xs font-medium bg-gray-700 text-gray-300';
-                    
-                    if (sessionInterval) {
-                        clearInterval(sessionInterval);
+        function simulateProgress() {
+            // Simulate push-up progress for demo
+            currentProgress += progressDirection * 2;
+            
+            if (currentProgress >= 100) {
+                currentProgress = 100;
+                progressDirection = -1;
+                // Complete rep
+                setTimeout(() => {
+                    if (currentProgress >= 95) {
+                        pushupCount += 0.5;
+                        updateDisplay();
                     }
-                }
-            } catch (error) {
-                console.error('Error stopping counter:', error);
+                }, 100);
+            } else if (currentProgress <= 0) {
+                currentProgress = 0;
+                progressDirection = 1;
+                // Complete rep
+                setTimeout(() => {
+                    if (currentProgress <= 5) {
+                        pushupCount += 0.5;
+                        updateDisplay();
+                    }
+                }, 100);
             }
-        });
+            
+            progressBar.style.width = currentProgress + '%';
+            progressPercent.textContent = Math.round(currentProgress) + '%';
+        }
 
-        // Initialize stats update
-        setInterval(updateStats, 1000);
+        function updateSessionTime() {
+            if (!startTime) return;
+            
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            
+            sessionTimeEl.textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update average rate
+            if (elapsed > 0) {
+                const avgPerMin = (Math.floor(pushupCount) / elapsed * 60).toFixed(1);
+                avgRateEl.textContent = avgPerMin;
+            }
+        }
+
+        function updateDisplay() {
+            pushupCountEl.textContent = Math.floor(pushupCount);
+        }
+
+        // Event listeners
+        startBtn.addEventListener('click', startSession);
+        stopBtn.addEventListener('click', stopSession);
+
+        // Initialize display
+        updateDisplay();
     </script>
 </body>
 </html>
