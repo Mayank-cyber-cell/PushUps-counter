@@ -124,7 +124,7 @@ while True:
         img = cv2.flip(img, 1)
         cv2.rectangle(... 'Take your position')
 ```
-- Display a message if the user is not in proper pose
+- Display a message if the user is not in proper pose.
 
 ### 13. Display Count and FPS
 ```python
