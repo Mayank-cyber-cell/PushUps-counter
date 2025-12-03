@@ -1,6 +1,5 @@
 # Push-Up Counter with Pose Detection
 
-
 This project uses **MediaPipe** and **OpenCV** to build an intelligent push-up counter that uses **pose estimation** to track body joints and count reps in real time. It's an excellent example of how computer vision can be used in fitness and health applications.
 
 
