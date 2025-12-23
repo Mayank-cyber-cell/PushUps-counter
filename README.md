@@ -1,7 +1,45 @@
 # Push-Up Counter with Pose Detection
 
+[![CI](https://github.com/Mayank-cyber-cell/PushUps-counter/actions/workflows/ci.yml/badge.svg)](https://github.com/Mayank-cyber-cell/PushUps-counter/actions/workflows/ci.yml)
+
 This project uses **MediaPipe** and **OpenCV** to build an intelligent push-up counter that uses **pose estimation** to track body joints and count reps in real time. It's an excellent example of how computer vision can be used in fitness and health applications.
 
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.9+
+- Webcam
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Mayank-cyber-cell/PushUps-counter.git
+cd PushUps-counter
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python push_up_counter.py
+```
+
+### Docker Deployment
+
+```bash
+# Build the Docker image
+docker build -t pushup-counter .
+
+# Run with webcam and display access (Linux)
+docker run -it --rm \
+  --device=/dev/video0 \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  pushup-counter
+```
 
 ---
 
